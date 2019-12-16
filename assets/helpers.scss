@@ -5,3 +5,7 @@ $positions: relative, absolute;
     position: $position;
   }
 }
+
+._object-fit-cover {
+  object-fit: cover;
+}
