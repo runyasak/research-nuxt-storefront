@@ -35,13 +35,12 @@ export default {
       productImageHeight: 600
     }
   },
-  computed: {
-    productImageUrls () {
-      return this.$store.state.catalog.products.map(product => product.source.smallImage)
+  async asyncData ({ store }) {
+    await store.dispatch('catalog/fetchProducts', { size: 9 })
+
+    return {
+      productImageUrls: store.state.catalog.products.map(product => product.source.smallImage)
     }
-  },
-  mounted () {
-    this.$store.dispatch('catalog/fetchProducts', { size: 9 })
   },
   methods: {
     mapImageSrc (url) {
