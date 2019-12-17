@@ -22,11 +22,13 @@
       app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-spacer />
-      <img
-        src="/logo.svg"
-        alt="App Icon"
-        width="40"
-        height="40">
+      <nuxt-link to="/">
+        <img
+          src="/logo.svg"
+          alt="App Icon"
+          width="40"
+          height="40">
+      </nuxt-link>
       <v-spacer />
       <v-btn icon>
         <v-icon>mdi-cart</v-icon>
