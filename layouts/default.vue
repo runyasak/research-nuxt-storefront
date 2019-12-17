@@ -6,16 +6,13 @@
       temporary>
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
+          v-for="(category, index) in categories"
+          :key="index"
+          :to="{ name: 'category-urlKey', params: { urlKey: category.urlKey } }"
           router
           exact>
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title v-text="category.name" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -49,6 +46,7 @@
 
 <script>
 export default {
+  name: 'DefaultLayout',
   data () {
     return {
       drawer: false,
@@ -65,6 +63,18 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    categories () {
+      return this.$store.state.catalog.categories
+        .map(category => ({
+          name: category.source.name,
+          urlKey: category.source.urlKey
+        }))
+    }
+  },
+  created () {
+    this.$store.dispatch('catalog/fetchCategories', {})
   }
 }
 </script>
