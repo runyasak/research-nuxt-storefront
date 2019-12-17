@@ -44,8 +44,12 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
     '@nuxtjs/pwa'
   ],
+  axios: {
+    baseURL: 'http://localhost:8080'
+  },
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
