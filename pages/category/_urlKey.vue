@@ -1,9 +1,12 @@
 <template>
   <v-container id="cateogory-urlKey">
-    <h1>{{ categoryName }}</h1>
     <v-row>
       <v-col offset="2" cols="8">
-        <v-row>
+        <div class="d-flex justify-space-between align-center">
+          <h1>{{ categoryName }}</h1>
+          <span class="font-weight-bold">{{ productCount }} items</span>
+        </div>
+        <v-row v-if="productCount > 0">
           <v-col
             v-for="(url, index) in productImageUrls"
             :key="index"
@@ -18,6 +21,9 @@
               alt="Product Image">
           </v-col>
         </v-row>
+        <div v-else class="py-3">
+          No Product was found!
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -28,10 +34,16 @@ import { getImage } from '@/resources/image'
 
 const mapAllCategoryId = (categorySource) => {
   const result = [categorySource.id]
-  for (const child of categorySource.childrenData) {
-    result.push(child.id)
-    for (const subChild of child.childrenData) {
-      result.push(subChild.id)
+
+  if (categorySource.childrenData) {
+    for (const child of categorySource.childrenData) {
+      result.push(child.id)
+
+      if (child.childrenData) {
+        for (const subChild of child.childrenData) {
+          result.push(subChild.id)
+        }
+      }
     }
   }
 
@@ -49,7 +61,8 @@ export default {
 
     return {
       categoryName: store.state.catalog.category.source.name,
-      productImageUrls: store.state.catalog.products.map(product => product.source.image)
+      productImageUrls: store.state.catalog.products.map(product => product.source.image),
+      productCount: store.state.catalog.products.length
     }
   },
   methods: {
