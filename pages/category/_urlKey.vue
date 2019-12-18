@@ -8,17 +8,15 @@
         </div>
         <v-row v-if="productCount > 0">
           <v-col
-            v-for="(url, index) in productImageUrls"
+            v-for="(product, index) in products"
             :key="index"
             cols="12"
             md="6"
             lg="4">
-            <img
-              :src="mapImageSrc(url)"
-              class="_object-fit-cover"
-              width="100%"
-              height="100%"
-              alt="Product Image">
+            <category-product
+              :image-src="mapImageSrc(product.image)"
+              :name="product.name.split('&')[0]"
+              :price="product.priceInclTax" />
           </v-col>
         </v-row>
         <div v-else class="py-3">
@@ -52,6 +50,9 @@ const mapAllCategoryId = (categorySource) => {
 
 export default {
   name: 'CategoryUrlKey',
+  components: {
+    CategoryProduct: () => import('@/components/CategoryProduct')
+  },
   async asyncData ({ store, params: { urlKey } }) {
     await store.dispatch('catalog/fetchCategoryByUrlKey', { urlKey })
 
@@ -61,7 +62,7 @@ export default {
 
     return {
       categoryName: store.state.catalog.category.source.name,
-      productImageUrls: store.state.catalog.products.map(product => product.source.image),
+      products: store.state.catalog.products.map(product => product.source),
       productCount: store.state.catalog.products.length
     }
   },
