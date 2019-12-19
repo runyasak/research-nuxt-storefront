@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "dev:demo": "BASE_URL=https://demo.storefrontcloud.io  nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",

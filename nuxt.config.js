@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
+const BASE_URL = process.env.BASE_URL || 'http://localhost:8080'
+
 export default {
   mode: 'universal',
   /*
@@ -40,6 +42,9 @@ export default {
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify'
   ],
+  env: {
+    baseUrl: BASE_URL
+  },
   /*
   ** Nuxt.js modules
   */
@@ -48,7 +53,7 @@ export default {
     '@nuxtjs/pwa'
   ],
   axios: {
-    baseURL: 'http://localhost:8080'
+    baseURL: BASE_URL
   },
   /*
   ** vuetify module configuration
