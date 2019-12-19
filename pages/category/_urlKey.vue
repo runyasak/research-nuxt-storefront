@@ -17,7 +17,7 @@
               :to="{ name: 'product-urlPath', params: { urlPath: product.urlPath } }"
               class="_text-decoration-unset">
               <category-product
-                :image-src="mapImageSrc(product.image)"
+                :image-src="$mapImageUrl('600', '600', product.image)"
                 :name="product.name.split('&')[0]"
                 :price="product.priceInclTax" />
             </nuxt-link>
@@ -32,8 +32,6 @@
 </template>
 
 <script>
-import { getImage } from '@/resources/image'
-
 const mapAllCategoryId = (categorySource) => {
   const result = [categorySource.id]
 
@@ -68,11 +66,6 @@ export default {
       categoryName: store.state.catalog.category.source.name,
       products: store.state.catalog.products.map(product => product.source),
       productCount: store.state.catalog.products.length
-    }
-  },
-  methods: {
-    mapImageSrc (url) {
-      return getImage(600, 600, url, 'resize')
     }
   }
 }

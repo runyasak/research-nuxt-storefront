@@ -12,7 +12,7 @@
               md="6"
               lg="4">
               <img
-                :src="mapImageSrc(url)"
+                :src="$mapImageUrl(600, 600, url)"
                 class="_object-fit-cover"
                 width="100%"
                 height="100%"
@@ -26,25 +26,13 @@
 </template>
 
 <script>
-import { getImage } from '@/resources/image'
 export default {
   name: 'IndexPage',
-  data () {
-    return {
-      productImageWidth: 600,
-      productImageHeight: 600
-    }
-  },
   async asyncData ({ store }) {
     await store.dispatch('catalog/fetchProducts', { size: 9 })
 
     return {
       productImageUrls: store.state.catalog.products.map(product => product.source.smallImage)
-    }
-  },
-  methods: {
-    mapImageSrc (url) {
-      return getImage(this.productImageWidth, this.productImageHeight, url, 'resize')
     }
   }
 }
