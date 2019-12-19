@@ -14,7 +14,8 @@ const generateCategoryQueryString = urlKey => ({
 export const state = () => ({
   categories: [],
   category: [],
-  products: []
+  products: [],
+  productsByUrlPath: []
 })
 
 export const mutations = {
@@ -26,6 +27,9 @@ export const mutations = {
   },
   SET_PRODUCTS (state, value) {
     state.products = value
+  },
+  SET_PRODUCTS_BY_URL_PATH (state, value) {
+    state.productsByUrlPath = value
   }
 }
 
@@ -51,6 +55,17 @@ export const actions = {
 
     const result = await this.$axios.$get(`/api/catalog/${DEFAULT_CATALOG}/product/_search`, { params })
     commit('SET_PRODUCTS', camelizeKeys(result.hits.hits))
+  },
+  async fetchProductsByUrlPath ({ commit }, { urlPath, size = 50, from = 0 }) {
+    const params = {
+      _source_exclude: '*.msrp_display_actual_price_type,required_options,updated_at,created_at,attribute_set_id,options_container,msrp_display_actual_price_type,has_options,stock.manage_stock,stock.use_config_min_qty,stock.use_config_notify_stock_qty,stock.stock_id,stock.use_config_backorders,stock.use_config_enable_qty_inc,stock.enable_qty_increments,stock.use_config_manage_stock,stock.use_config_min_sale_qty,stock.notify_stock_qty,stock.use_config_max_sale_qty,stock.use_config_max_sale_qty,stock.qty_increments,small_image,sgn,*.sgn',
+      request: { query: { bool: { filter: { terms: { url_path: [urlPath] } } } } },
+      from,
+      size
+    }
+
+    const result = await this.$axios.$get(`/api/catalog/${DEFAULT_CATALOG}/product/_search`, { params })
+    commit('SET_PRODUCTS_BY_URL_PATH', camelizeKeys(result.hits.hits))
   }
 }
 
