@@ -21,3 +21,7 @@ $positions: relative, absolute;
 ._translate-left-50pct {
   transform: translateX(-50%)
 }
+
+._text-decoration-unset {
+  text-decoration: unset;
+}

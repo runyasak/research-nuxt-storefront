@@ -13,10 +13,14 @@
             cols="12"
             md="6"
             lg="4">
-            <category-product
-              :image-src="mapImageSrc(product.image)"
-              :name="product.name.split('&')[0]"
-              :price="product.priceInclTax" />
+            <nuxt-link
+              :to="{ name: 'product-urlPath', params: { urlPath: product.urlPath } }"
+              class="_text-decoration-unset">
+              <category-product
+                :image-src="mapImageSrc(product.image)"
+                :name="product.name.split('&')[0]"
+                :price="product.priceInclTax" />
+            </nuxt-link>
           </v-col>
         </v-row>
         <div v-else class="py-3">
