@@ -38,7 +38,7 @@ export const actions = {
     const result = await this.$axios.$get(`/api/catalog/${DEFAULT_CATALOG}/category/_search`, { params: generateCategoryQueryString(urlKey) })
     commit('SET_CATEGORY', camelizeKeys(result.hits.hits[0]))
   },
-  async fetchProducts ({ commit }, { size = 50, from = 0, categoryIds = [] }) {
+  async fetchProducts ({ commit }, { size, from = 0, categoryIds = [] }) {
     const categoryIdsQueryString = {
       _source_exclude: 'description,configurable_options,sgn,*.sgn,msrp_display_actual_price_type,*.msrp_display_actual_price_type,required_options',
       _source_include: 'type_id,sku,product_links,tax_class_id,special_price,special_to_date,special_from_date,name,price,priceInclTax,originalPriceInclTax,originalPrice,specialPriceInclTax,id,image,sale,new,url_path,url_key,status,tier_prices,configurable_children.sku,configurable_children.price,configurable_children.special_price,configurable_children.priceInclTax,configurable_children.specialPriceInclTax,configurable_children.originalPrice,configurable_children.originalPriceInclTax',
