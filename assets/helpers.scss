@@ -13,3 +13,11 @@ $positions: relative, absolute;
 ._cs-pointer {
   cursor: pointer;
 }
+
+._left-50pct {
+  left: 50%;
+}
+
+._translate-left-50pct {
+  transform: translateX(-50%)
+}
