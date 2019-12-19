@@ -19,10 +19,13 @@
     </v-navigation-drawer>
     <v-app-bar
       fixed
-      app>
+      app
+      class="_position-relative">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-spacer />
-      <nuxt-link to="/">
+      <nuxt-link
+        class="_position-absolute _left-50pct _translate-left-50pct"
+        to="/">
         <img
           src="/logo.svg"
           alt="App Icon"
