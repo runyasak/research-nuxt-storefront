@@ -29,7 +29,9 @@
         <div class="headline font-weight-bold">
           ${{ product.priceInclTax }}
         </div>
-        <v-btn class="mt-8" color="primary">Add to cart</v-btn>
+        <v-btn class="mt-8" color="primary">
+          Add to cart
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
