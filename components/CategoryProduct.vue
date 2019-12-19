@@ -10,7 +10,7 @@
       {{ name }}
     </div>
     <div class="font-weight-bold grey--text">
-      $ {{ price }}
+      ${{ parseFloat(price).toFixed(2) }}
     </div>
   </div>
 </template>
