@@ -1,4 +1,4 @@
-# research-vue-storefront
+# research-nuxt-storefront
 
 > My beautiful Nuxt.js project
 
