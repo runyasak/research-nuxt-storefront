@@ -20,9 +20,7 @@
         <div class="mb-4">
           {{ categoryDisplay }}
         </div>
-        <h1 class="mb-4">
-          {{ product.name.split('&')[0] }}
-        </h1>
+        <h1 v-html="product.name" class="mb-4" />
         <div class="grey--text mb-4">
           SKU: {{ product.sku }}
         </div>

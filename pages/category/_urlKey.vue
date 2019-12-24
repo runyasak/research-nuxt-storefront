@@ -18,7 +18,7 @@
               class="_text-decoration-unset">
               <category-product
                 :image-src="$mapImageUrl('600', '600', product.image)"
-                :name="product.name.split('&')[0]"
+                :name="product.name"
                 :price="product.priceInclTax" />
             </nuxt-link>
           </v-col>

@@ -6,9 +6,7 @@
       width="100%"
       height="300"
       alt="Product Image">
-    <div>
-      {{ name }}
-    </div>
+    <div v-html="name" />
     <div class="font-weight-bold grey--text">
       ${{ parseFloat(price).toFixed(2) }}
     </div>
